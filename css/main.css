@@ -75,13 +75,14 @@ ul.posts li {
   .project-box {
     padding: 15px;
     margin-top: 20px;
+    margin-bottom: 20px;
   }
 
   .project-box p {
-    font-size: 12px;
+    font-size: 16px;
   }
 
   .project-box a {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
