@@ -1,6 +1,9 @@
 body {
   font-family: Arial, sans-serif;
   text-align: center;
+  margin: 10px;
+  padding: 0;
+  padding-bottom: 5%;  /* 为页面底部添加足够的留白，避免按钮遮挡 */
 }
 
 
@@ -13,7 +16,9 @@ h1 {
 #box {
   display: flex;
   flex-direction: column;
+  margin: 0 auto; /* 居中显示 */
   background-color: #f7bf24;
+  border: 2px solid #fad82e;
   width: 137px;
   border-radius: 8px;
   padding: 15px;
@@ -21,6 +26,9 @@ h1 {
 }
 
 #clickButton {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto; /* 居中显示 */
   padding: 0px;
   background-color: #f7bf24;
   font-size: 20px;
@@ -36,11 +44,11 @@ h1 {
   transform: translateY(5px); /* Move the button down when pressed */
   box-shadow: none; /* Remove the box shadow when pressed */
 }
+
 #clickButton:active:focus {
   transform: translateY(5px);
   box-shadow: none;
 }
-
 
 #countDisplay {
   font-size: 18px;
@@ -51,13 +59,17 @@ h1 {
 #chart {
   margin-top: 40px;
   padding: 10px 20px;
+  display: flex;
+  margin: 0 auto; /* 居中显示 */
 }
 
 /*以下为红灯的css*/
-
 #square {
   width: 137px;
   height: 130px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto; /* 居中显示 */
   background-color: black;
   transition: background-color 0.3s ease;
   display: flex;
@@ -83,41 +95,14 @@ h1 {
   }
 }
 
-/* 回到主頁按钮的CSS */
-.back-button {
-  position: fixed;  /* 固定在页面左上角 */
-  top: 10px;        /* 距离页面顶部10px */
-  left: 10px;       /* 距离页面左边10px */
-  padding: 10px 20px;
-  background: whitesmoke;
-  color: rgb(75, 185, 253);     /* 按钮文字颜色 */
-  font-size: 16px;
-  border: 2px solid rgb(75, 185, 253);
-  border-radius: 8px; /* 圆角 */
-  cursor: pointer;
-  text-decoration: none; /* 移除链接的下划线 */
-  transition: background-color 0.3s ease, transform 0.2s; /* 按钮动画 */
-  z-index: 1000; /* 确保按钮在其他内容之上 */
-}
 
-/* 鼠标悬停时按钮样式 */
-.back-button:hover {
-  background-color: rgb(75, 185, 253); /* 背景色变化 */
-  color: white;     /* 按钮文字颜色 */
-}
-
-.back-button:active {
-  transform: translateY(2px);  /* 按钮点击时微微下移 */
-  box-shadow: none; /* 移除阴影 */
-}
-
-/* 統計圖相關按钮的CSS */
+/* ======= 統計圖相關按钮的CSS ======= */
 .chart-button {
   padding: 10px 20px;
-  background: white;
-  color: rgb(75, 185, 253);     /* 按钮文字颜色 */
+  background-color: #f7bf24;
+  border: 2px solid #fad82e; 
+  color: #333;
   font-size: 16px;
-  border: 2px solid rgb(75, 185, 253);
   border-radius: 8px; /* 圆角 */
   cursor: pointer;
   text-decoration: none; /* 移除链接的下划线 */
@@ -126,11 +111,190 @@ h1 {
 
 /* 鼠标悬停时按钮样式 */
 .chart-button:hover {
-  background-color: rgb(75, 185, 253); /* 背景色变化 */
-  color: white;     /* 按钮文字颜色 */
+  background-color: #f7a124; /* 背景色变化 */
+  color: black;     /* 按钮文字颜色 */
 }
 
 .chart-button:active {
   transform: translateY(2px);  /* 按钮点击时微微下移 */
   box-shadow: none; /* 移除阴影 */
+}
+
+/* ================== 响应式设计 - 統計圖相關按钮的CSS ================== */
+@media (max-width: 767px) {
+
+  .chart-button {
+    font-size: 12px;
+    padding: 8px 16px;
+    margin-left: 0; /* 小屏幕上去掉左右间距 */
+    margin-bottom: 10px; 
+  }
+}
+
+
+/* ================== 回到主頁按钮 ================== */
+#backButton {
+  padding: 10px 20px;
+  background: rgb(110, 199, 255);
+  color: #333; /* 按钮文字颜色 */
+  border: 2px solid rgb(142, 209, 250); 
+  font-size: 14px;
+  border-radius: 8px; /* 圆角 */
+  cursor: pointer;
+  text-decoration: none; /* 移除链接的下划线 */
+  transition: background-color 0.3s ease, transform 0.2s; /* 按钮动画 */
+}
+
+#backButton:hover {
+  background-color: rgb(30, 167, 252); /* 背景色变化 */
+  color: #333; /* 按钮文字颜色变化 */
+}
+
+#backButton:active {
+  transform: translateY(2px); /* 按钮点击时微微下移 */
+  box-shadow: none; /* 移除阴影 */
+}
+
+/* ================== 查看说明按钮 ================== */
+#toggleInstructions {
+  padding: 10px 20px;
+  background-color: #f7bf24;
+  border: 2px solid #fad82e; 
+  color: #333;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+  margin-left: 20px; /* 给按钮之间增加一定的间距 */
+}
+
+#toggleInstructions:hover {
+  background-color: #f7a124;
+}
+
+/* ================== 两个按钮容器的布局 ================== */
+#buttonContainer {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  display: flex;  /* 使用flex布局将按钮并排显示 */
+  align-items: center;  /* 垂直居中按钮 */
+  z-index: 1000; /* 确保按钮在页面内容之上 */
+}
+
+/* ================== 使用说明折叠部分 ================== */
+#usageInstructions {
+  display: none; /* 初始隐藏使用说明 */
+  position: fixed;
+  top: 25%; /* 距离頂部一定的距离 */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white; /* 更深的背景色，增加对比度 */
+  color: black;
+  padding: 15px 25px;
+  border-radius: 8px;
+  border: 4px solid #fad82e;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+  max-width: 90%;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: left; /* 左对齐 */
+  z-index: 1000;
+  overflow-y: auto; /* 如果内容过多，允许滚动 */
+}
+
+/* ================== 响应式设计 - 回到主頁&使用说明部分 ================== */
+@media (max-width: 767px) {
+  #usageInstructions {
+    font-size: 14px;
+    padding: 5px 10px;
+    top: 35%; /* 距离頂部一定的距离 */
+}
+
+  #backButton, #toggleInstructions {
+    font-size: 12px;
+    padding: 8px 16px;
+  }
+
+  #buttonContainer {
+    flex-direction: column; /* 在小屏幕上将按钮垂直排列 */
+    align-items: flex-start; /* 左对齐 */
+  }
+
+  #toggleInstructions {
+    margin-left: 0; /* 小屏幕上去掉左右间距 */
+    margin-bottom: 10px; 
+  }
+}
+
+/* ================== 基礎功能 响应式设计部分 ================== */
+
+/* 小屏幕适配（手机端） */
+@media (max-width: 767px) {
+  /* body 和标题 */
+  body {
+    padding-top: 8%;  /* 为页面top添加足够的留白，避免按钮遮挡 */
+  }
+
+  h1 {
+    font-size: 20px;
+    margin-top: 60px;
+  }
+
+  /* #box 适应屏幕宽度 */
+  #box {
+    width: 30%; /* 宽度调整为屏幕的80% */
+    padding: 20px;
+  }
+
+  /* #clickButton 适应手机屏幕 */
+  #clickButton {
+    font-size: 18px;
+    width: 100%; 
+  }
+
+  #square {
+    width: 100%; 
+  }
+
+  #countDisplay {
+    font-size: 16px;
+    padding: 5px 10px;
+    width: 100%; 
+  }
+
+  /* 调整图片的自适应宽度 */
+  img {
+    width: 100%; /* 图片宽度100%适应屏幕 */
+    height: auto;
+  }
+
+}
+
+/* 大屏幕适配（桌面端） */
+@media (min-width: 768px) {
+  /* body 和标题 */
+  h1 {
+    font-size: 25px;
+    margin-top: 80px;
+  }
+
+  /* #clickButton 适配桌面端 */
+  #clickButton {
+    font-size: 20px;
+  }
+
+  #countDisplay {
+    font-size: 18px;
+    padding: 10px 20px;
+  }
+
+  #chart {
+    margin: 40px auto;
+  }
+
+  /* 图片自适应 */
+  img {
+    height: auto;
+  }
 }
