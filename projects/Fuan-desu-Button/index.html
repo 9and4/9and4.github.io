@@ -1,13 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 视口meta标签，确保响应式布局 -->
     <title>不安ですボタン</title>
     <link rel="stylesheet" type="text/css" href="v1-styles.css">
 </head>
 
 <body>
-    <!-- "回到主頁" 按钮 -->
-    <a href="https://9and4.github.io/projects/" class="back-button">回到九四公園！</a>
+
+    <div id="buttonContainer">
+        <!-- 回到主頁按钮 -->
+        <button id="backButton" onclick="window.location.href='your-homepage-url.html'">回到九四公園</button>
+        
+        <!-- 查看说明按钮 -->
+        <button id="toggleInstructions" onclick="toggleInstructions()">查看使用说明</button>
+    </div>
+
+    <!-- 使用说明折叠部分 -->
+    <div id="usageInstructions">
+        <p>使用説明：</p>
+        <p>1. 按下黑色塑料片⬛，按鈕會亮起紅燈🟥並發出「不安です」的聲音。</p>
+        <p>2. 使用時注意調節音量🔊。</p>
+        <p>3. 推薦在PC端使用💻，效果更佳。</p>
+    </div>
+
 
     <h1>歡迎光臨<br>「不安です」ボタン</h1>
     <div style="display: flex; justify-content: center; align-items: center;">
@@ -24,6 +41,7 @@
     <button id="showChartButton" class="chart-button">展開統計圖</button>
     <button id="resetButton" class="chart-button">重置今天的數據</button>
     <canvas id="chart" style="height: 60px; "></canvas>
+
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="v3-script.js"></script>
