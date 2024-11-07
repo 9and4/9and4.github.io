@@ -198,3 +198,18 @@ function resetDataForToday() {
 
 // Initialize the count display
 updateCount();
+
+// 切换使用说明的显示和隐藏
+function toggleInstructions() {
+  const instructions = document.getElementById('usageInstructions');
+  const button = document.getElementById('toggleInstructions');
+  
+  // 如果说明已显示，则隐藏它，否则显示它
+  if (instructions.style.display === 'none' || instructions.style.display === '') {
+      instructions.style.display = 'block';  // 显示使用说明
+      button.innerText = '隐藏使用说明';  // 更改按钮文本为“隐藏”
+  } else {
+      instructions.style.display = 'none';  // 隐藏使用说明
+      button.innerText = '查看使用说明';  // 更改按钮文本为“查看”
+  }
+}
