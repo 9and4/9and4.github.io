@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>不安ですボタン</title>
+    <link rel="stylesheet" type="text/css" href="v1-styles.css">
+</head>
+
+<body>
+    <h1>不安ですボタン</h1>
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <div id="box">
+            <button id="clickButton" onclick="lightUpSquare()">
+                <div id="square">
+                    不安です
+                </div>
+            </button>
+            <img src="komarimashita.png" alt="Click Me">
+        </div>
+    </div>
+    <p id="countDisplay">Count: 0</p>
+    <button id="showChartButton">Show Chart</button>
+    <button id="resetButton">Reset Data for Today</button>
+    <canvas id="chart" style="height: 60px; "></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="v3-script.js"></script>
+    <script src="test1-redlight-script.js"></script>
+</body>
+</html>
