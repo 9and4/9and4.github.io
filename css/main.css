@@ -1,15 +1,20 @@
 :root {
     --link-color: #404040;
     --link-border: #9f7544;
+    --font-main: "IM Fell English", "KaiTi", "Kaiti SC", "STKaiti", "Comic Sans MS", source-han-serif-tc, ui-serif, system-ui, serif;
+    /*--font-secondary: 'Open Sans', 'Microsoft YaHei', Hiragino Sans GB, system-ui, san-serif;*/
+    --font-secondary: "Roboto Slab", "Noto Sans SC", "Noto Sans TC", "Noto Sans", ui-sans-serif, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    --font-code: ui-monospace, "Cascadia Mono", "Segoe UI Mono", "Liberation Mono", Menlo, Monaco, Consolas,"Noto Sans TC", "Noto Sans SC",monospace;  
 }
 
 body {
     margin: 60px auto;
     width: 70%;
+    font-family: var(--font-secondary);
 }
 
 nav ul, footer ul {
-    font-family:'Helvetica', 'Arial', 'Sans-Serif';
+    font-family: var(--font-main);
     padding: 0px;
     list-style: none;
     font-weight: bold;
@@ -18,17 +23,33 @@ nav ul li, footer ul li {
     display: inline;
     margin-right: 20px;
 }
+
 a {
     text-decoration: none;
-    color: #999;
+    color:var(--link-border);
+    cursor: pointer;
+    transition: 0.2s;
+    border-radius: 3px;
 }
 a:hover {
-    text-decoration: underline;
+    text-decoration: none;
+    color:var(--link-border);
+    box-shadow: 0 0 0 2px var(--link-border);
 }
+
 h1 {
     font-size: 3em;
-    font-family:'Helvetica', 'Arial', 'Sans-Serif';
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-main);
+}
+
 p {
     font-size: 1.5em;
     line-height: 1.4em;
@@ -68,15 +89,14 @@ ul.posts li {
 
 .project-box a {
   text-decoration: none;
-  color:var(--link-color);
+  color:var(--link-border);
   cursor: pointer;
-  text-decoration: none;
   transition: 0.2s;
   border-radius: 3px;
 }
 
 .project-box a:hover {
-  color: rgb(142, 209, 250);
+  color: var(--link-border);
   box-shadow: 0 0 0 2px var(--link-border);
 }
 
