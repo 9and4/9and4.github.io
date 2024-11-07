@@ -1,0 +1,83 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+
+h1 {
+  color: #333;
+}
+
+#box {
+  display: flex;
+  flex-direction: column;
+  background-color: #f7bf24;
+  width: 137px;
+  border-radius: 8px;
+  padding: 15px;
+}
+
+#clickButton {
+  padding: 0px;
+  background-color: #f7bf24;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16); /* Add box shadow for the button */
+  transition: transform 0.2s, box-shadow 0.2s; /* Add transitions for smooth animation */
+  outline: none; /* Remove the default focus outline */
+}
+
+#clickButton:focus,
+#clickButton:active {
+  transform: translateY(5px); /* Move the button down when pressed */
+  box-shadow: none; /* Remove the box shadow when pressed */
+}
+#clickButton:active:focus {
+  transform: translateY(5px);
+  box-shadow: none;
+}
+
+
+#countDisplay {
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+#chart {
+  margin-top: 40px;
+  padding: 10px 20px;
+}
+
+
+
+
+/*以下为红灯的css*/
+
+#square {
+  width: 137px;
+  height: 130px;
+  background-color: black;
+  transition: background-color 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgba(128, 128, 128, 0.5);
+  border-radius: 4px;
+}
+
+.glow {
+  animation: glow 1s infinite;
+}
+
+@keyframes glow {
+  0% {
+      box-shadow: 0 0 5px red;
+  }
+  50% {
+      box-shadow: 0 0 20px red;
+  }
+  100% {
+      box-shadow: 0 0 5px red;
+  }
+}
