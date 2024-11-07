@@ -1,7 +1,13 @@
+:root {
+    --link-color: #404040;
+    --link-border: #9f7544;
+}
+
 body {
     margin: 60px auto;
     width: 70%;
 }
+
 nav ul, footer ul {
     font-family:'Helvetica', 'Arial', 'Sans-Serif';
     padding: 0px;
@@ -51,22 +57,27 @@ ul.posts li {
   border-radius: 12px; /* 圆角边框 */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 阴影效果 */
   margin-top: 30px;
+  margin-bottom: 20px;
 }
 
 .project-box p {
-  font-size: 14px;
+  font-size: 16px;
   color: #333;
   line-height: 1.5;
 }
 
 .project-box a {
-  color: rgb(110, 199, 255); /* 按钮样式 */
   text-decoration: none;
-  font-weight: bold;
+  color:var(--link-color);
+  cursor: pointer;
+  text-decoration: none;
+  transition: 0.2s;
+  border-radius: 3px;
 }
 
 .project-box a:hover {
   color: rgb(142, 209, 250);
+  box-shadow: 0 0 0 2px var(--link-border);
 }
 
 /* ===================== 响应式设计 - 项目盒子部分 ===================== */
@@ -75,15 +86,14 @@ ul.posts li {
   .project-box {
     padding: 15px;
     margin-top: 20px;
-    margin-bottom: 20px;
   }
 
   .project-box p {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .project-box a {
-    font-size: 16px;
+    font-size: 14px;
   }
 
 }
