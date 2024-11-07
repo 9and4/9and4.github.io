@@ -41,3 +41,47 @@ ul.posts {
 ul.posts li {
     list-style: none;
 }
+
+
+/* ===================== 项目盒子样式 ===================== */
+.project-box {
+  background-color: white; /* 黑色背景 */
+  color: #333;
+  padding: 20px;
+  border-radius: 12px; /* 圆角边框 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 阴影效果 */
+  margin-top: 30px;
+}
+
+.project-box p {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.5;
+}
+
+.project-box a {
+  color: rgb(110, 199, 255); /* 按钮样式 */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.project-box a:hover {
+  color: rgb(142, 209, 250);
+}
+
+/* ===================== 响应式设计 - 项目盒子部分 ===================== */
+@media (max-width: 767px) {
+
+  .project-box {
+    padding: 15px;
+    margin-top: 20px;
+  }
+
+  .project-box p {
+    font-size: 12px;
+  }
+
+  .project-box a {
+    font-size: 14px;
+  }
+}
