@@ -12,7 +12,7 @@ const audio = new Audio("female-audio-fuanndesu.wav");
 
 // Update the count display
 function updateCount() {
-  countDisplay.textContent = `Count: ${count}`;
+  countDisplay.textContent = `好棒，今天「不安」了 ${count} 次！`;
 }
 
 // Function to retrieve the click count from localStorage
@@ -112,10 +112,10 @@ chartCanvas.style.display = "none";
 function toggleChartDisplay() {
   if (chartCanvas.style.display === "none") {
     chartCanvas.style.display = "block";
-    showChartButton.textContent = "Hide Chart";
+    showChartButton.textContent = "收起統計圖";
   } else {
     chartCanvas.style.display = "none";
-    showChartButton.textContent = "Show Chart!";
+    showChartButton.textContent = "展開統計圖";
   }
 }
 
@@ -142,7 +142,7 @@ function updateChart() {
         labels: clickCountData.labels,
         datasets: [
           {
-            label: "Click Count",
+            label: "「不安」次數（Click Count）",
             data: clickCountData.data,
             backgroundColor: "rgba(0, 123, 255, 0.5)",
             borderColor: "rgba(0, 123, 255, 1)",
@@ -175,7 +175,7 @@ updateCount();
 const resetButton = document.getElementById("resetButton");
 resetButton.addEventListener("click", function () {
   // Display the confirmation pop-up
-  const confirmation = confirm("Are you sure you want to reset the data for today?");
+  const confirmation = confirm("你确定要將今天的“不安”清零吗？Are you sure you want to reset the data for today?");
   if (confirmation) {
     resetDataForToday();
     updateCount(); // Update the count display
