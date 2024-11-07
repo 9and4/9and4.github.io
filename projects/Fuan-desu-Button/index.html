@@ -7,9 +7,9 @@
 
 <body>
     <!-- "回到主頁" 按钮 -->
-    <a href="https://9and4.github.io/projects/" class="back-button">返回九四公園</a>
-    
-    <h1>不安ですボタン</h1>
+    <a href="https://9and4.github.io/projects/" class="back-button">回到九四公園！</a>
+
+    <h1>歡迎光臨<br>「不安です」ボタン</h1>
     <div style="display: flex; justify-content: center; align-items: center;">
         <div id="box">
             <button id="clickButton" onclick="lightUpSquare()">
@@ -20,9 +20,9 @@
             <img src="komarimashita.png" alt="Click Me">
         </div>
     </div>
-    <p id="countDisplay">Count: 0</p>
-    <button id="showChartButton">Show Chart</button>
-    <button id="resetButton">Reset Data for Today</button>
+    <p id="countDisplay">好棒，今天「不安」了 0 次！</p>
+    <button id="showChartButton" class="chart-button">展開統計圖</button>
+    <button id="resetButton" class="chart-button">重置今天的數據</button>
     <canvas id="chart" style="height: 60px; "></canvas>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
