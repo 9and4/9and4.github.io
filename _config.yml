@@ -1,3 +1,4 @@
-	name: 9and4, 九四公園
-	markdown: kramdown
-        permalink: /blog/:year/:month/:day/:title
+name: "九四公園"
+description: "前方到站，九四公園。請握扶手，站穩踏階。"
+markdown: kramdown
+permalink: /blog/:year/:month/:day/:title
