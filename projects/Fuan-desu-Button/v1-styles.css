@@ -6,6 +6,8 @@ body {
 
 h1 {
   color: #333;
+  margin-top: 80px; /* 给标题留出空间，避免按钮挡住 */
+  font-size: 25px;
 }
 
 #box {
@@ -15,6 +17,7 @@ h1 {
   width: 137px;
   border-radius: 8px;
   padding: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* 现代阴影效果 */
 }
 
 #clickButton {
@@ -40,17 +43,15 @@ h1 {
 
 
 #countDisplay {
-  font-size: 20px;
+  font-size: 18px;
   margin-top: 20px;
+  padding: 10px 20px;
 }
 
 #chart {
   margin-top: 40px;
   padding: 10px 20px;
 }
-
-
-
 
 /*以下为红灯的css*/
 
@@ -88,24 +89,48 @@ h1 {
   top: 10px;        /* 距离页面顶部10px */
   left: 10px;       /* 距离页面左边10px */
   padding: 10px 20px;
-  background-color: #4CAF50; /* 按钮背景色 */
-  color: white;     /* 按钮文字颜色 */
+  background: whitesmoke;
+  color: rgb(75, 185, 253);     /* 按钮文字颜色 */
   font-size: 16px;
-  border: none;
-  border-radius: 5px; /* 圆角 */
+  border: 2px solid rgb(75, 185, 253);
+  border-radius: 8px; /* 圆角 */
   cursor: pointer;
   text-decoration: none; /* 移除链接的下划线 */
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16); /* 加上阴影 */
   transition: background-color 0.3s ease, transform 0.2s; /* 按钮动画 */
+  z-index: 1000; /* 确保按钮在其他内容之上 */
 }
 
 /* 鼠标悬停时按钮样式 */
 .back-button:hover {
-  background-color: #45a049; /* 背景色变化 */
-  transform: scale(1.05);  /* 按钮微微放大 */
+  background-color: rgb(75, 185, 253); /* 背景色变化 */
+  color: white;     /* 按钮文字颜色 */
 }
 
 .back-button:active {
-  transform: translateY(3px);  /* 按钮点击时微微下移 */
+  transform: translateY(2px);  /* 按钮点击时微微下移 */
+  box-shadow: none; /* 移除阴影 */
+}
+
+
+.chart-button {
+  padding: 10px 20px;
+  background: white;
+  color: rgb(75, 185, 253);     /* 按钮文字颜色 */
+  font-size: 16px;
+  border: 2px solid rgb(75, 185, 253);
+  border-radius: 8px; /* 圆角 */
+  cursor: pointer;
+  text-decoration: none; /* 移除链接的下划线 */
+  transition: background-color 0.3s ease, transform 0.2s; /* 按钮动画 */
+}
+
+/* 鼠标悬停时按钮样式 */
+.chart-button:hover {
+  background-color: rgb(75, 185, 253); /* 背景色变化 */
+  color: white;     /* 按钮文字颜色 */
+}
+
+.chart-button:active {
+  transform: translateY(2px);  /* 按钮点击时微微下移 */
   box-shadow: none; /* 移除阴影 */
 }
