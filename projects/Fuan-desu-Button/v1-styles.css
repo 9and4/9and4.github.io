@@ -81,3 +81,31 @@ h1 {
       box-shadow: 0 0 5px red;
   }
 }
+
+/* 回到主頁按钮的CSS */
+.back-button {
+  position: fixed;  /* 固定在页面左上角 */
+  top: 10px;        /* 距离页面顶部10px */
+  left: 10px;       /* 距离页面左边10px */
+  padding: 10px 20px;
+  background-color: #4CAF50; /* 按钮背景色 */
+  color: white;     /* 按钮文字颜色 */
+  font-size: 16px;
+  border: none;
+  border-radius: 5px; /* 圆角 */
+  cursor: pointer;
+  text-decoration: none; /* 移除链接的下划线 */
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16); /* 加上阴影 */
+  transition: background-color 0.3s ease, transform 0.2s; /* 按钮动画 */
+}
+
+/* 鼠标悬停时按钮样式 */
+.back-button:hover {
+  background-color: #45a049; /* 背景色变化 */
+  transform: scale(1.05);  /* 按钮微微放大 */
+}
+
+.back-button:active {
+  transform: translateY(3px);  /* 按钮点击时微微下移 */
+  box-shadow: none; /* 移除阴影 */
+}
