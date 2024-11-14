@@ -12,7 +12,7 @@ const audio = new Audio("female-audio-fuanndesu.wav");
 
 // Update the count display
 function updateCount() {
-  countDisplay.textContent = `好棒，今天「不安」了 ${count} 次！`;
+  countDisplay.textContent = `好棒，已經「不安」了 ${count} 次！`;
 }
 
 // Function to retrieve the click count from localStorage
