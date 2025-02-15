@@ -328,7 +328,7 @@ button:hover {
     align-items: center;
 }
 
-.settings-header-title{
+.settings-header-title {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -341,6 +341,7 @@ button:hover {
 .icon {
     width: 24px;
     height: 24px;
+    display: inline-block;
 }
 
 /* 卡片样式 */
