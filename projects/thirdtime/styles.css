@@ -1,0 +1,404 @@
+:root {
+    --background-color: #f4f4f4;
+    --text-color: #000000;
+    --container-bg: #ffffff;
+    --text-secondary: #7a7a7a;
+    --text-third: #b0c1e0;
+    --timer-bg: rgb(219 234 254);
+    --timer-bg-work: rgb(175, 243, 175);
+    --timer-bg-rest: #FFD700;
+    --progress-color-work: #31e631;
+    --progress-color-rest: #ffb700;
+    --focus-work: #4ec24e;
+    --focus-rest: #e09d0d;
+    
+    --btn-text: #ffffff;
+    --button-bg: rgb(109, 172, 255);
+    --button-hover-bg: rgb(0, 91, 211);
+    --checkbox-bg: rgb(54, 141, 255);
+    --checkbox-focus: rgb(0, 91, 211);
+    --checkbox-text: #fff;
+    --debt-background-light: rgba(255, 165, 0, 0.5);
+    --debt-background-dark: rgba(255, 69, 0, 0.5);
+
+    --tab-bg: #f6faff;
+    --tab-item-bg: rgb(219 234 254);
+    --input-bg: rgb(255, 255, 255);
+}
+
+body.dark-mode {
+    --background-color: #121212;
+    --text-color: #e3e4ff;
+    --container-bg: #363636;
+    --text-secondary: #b6b6d3;
+    --text-third: #878794;
+    --timer-bg: #4c4c52;
+    --timer-bg-work: #00ae4e;
+    --timer-bg-rest: #af6702;
+    --progress-color-work: #3CB371;
+    --progress-color-rest: #bd7802;
+    --focus-work: #028c40;
+    --focus-rest: #8e5300;
+
+    --btn-text: #fff;
+    --button-bg: #6b4de0;
+    --button-hover-bg: #431ed7;
+    --checkbox-bg: #6b4de0;
+    --checkbox-focus: #714dff;
+    --button-text-color: #cccfff;
+
+    --tab-bg: #1f1e23;
+    --tab-item-bg: rgb(73 73 73);
+    --input-bg: #111115;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.5s ease;
+    min-height: 100vh; /* 确保 body 至少占满整个视口高度 */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* 将内容顶部对齐，而不是居中 */
+    padding-top: 20px; /* 添加顶部内边距，避免内容紧贴顶部 */
+}
+
+.container {
+    background: var(--container-bg);
+    outline: 2px solid var(--timer-bg);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 440px;
+    position: relative;
+    text-align: center;
+    transition: background-color 0.5s ease, color 0.5s ease;
+    margin-bottom: 20px; /* 添加底部外边距，确保内容不会紧贴底部 */
+}
+
+.header {
+    background-color: var(--timer-bg);
+    border-bottom: 2px solid var(--timer-bg);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.header-btn-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 10px;
+}
+
+.content {
+    padding: 20px;
+}
+
+h1 {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+ul {
+    list-style-type: none; /* 去掉默认项目符号 */
+    padding: 0;
+}
+li {
+    position: relative; /* 使伪元素相对于列表项定位 */
+    padding-left: 15px; /* 给项目符号留出空间 */
+    margin-bottom: 8px;
+}
+li::before {
+    content: '*'; /* 使用箭头符号作为自定义符号 */
+    position: absolute;
+    left: 5px; /* 符号距离左边的距离 */
+    font-size: 20px; /* 符号大小 */
+    line-height: 1.2; /* 符号行高 */
+}
+
+a {
+    text-decoration: none;
+    color: var(--button-bg);
+}
+a:hover {
+    text-decoration: underline;
+}
+
+.input-section, .settings-section, .thx-section {
+    margin: 10px 0;
+}
+
+input, select {
+    font-family: Arial, sans-serif;
+    padding: 5px;
+    margin: 5px 0;
+    width: 25%;
+    font-size: 16px;
+    border: 2px solid var(--timer-bg);
+    border-radius: 5px;
+    background: var(--input-bg);
+    color: var(--text-color);
+    transition: outline 0.1s ease;
+}
+
+select {
+    width: 50%;
+}
+
+select:hover, input:hover {
+    outline: 2px solid var(--checkbox-bg);
+}
+
+select:focus, input:focus {
+    outline: 2px solid var(--checkbox-focus);
+}
+
+
+.main-section {
+    margin: 25px 0;
+    border: 2px solid var(--timer-bg);
+    border-radius: 5px;
+    padding: 15px;
+    background-color: var(--tab-bg);
+}
+
+#toggle-dark-mode {
+    padding: 10px;
+    cursor: pointer;
+}
+
+#start-work {
+    background-color: var(--focus-work);
+    transition: all 0.3s ease;
+    margin: 0;
+}
+
+#start-work:hover {
+    outline: 2px solid var(--checkbox-focus);
+    background-color: var(--progress-color-work);
+}
+
+#start-rest {
+    background-color: var(--focus-rest);
+    transition: all 0.3s ease;
+    margin: 0;
+}
+
+#start-rest:hover {
+    outline: 2px solid var(--checkbox-focus);
+    background-color: var(--progress-color-rest);
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    background-color: var(--button-bg);
+    color: var(--btn-text);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--button-hover-bg);
+    outline: 2px solid var(--button-bg);
+    color: var(--btn-text);
+}
+
+.control-buttons {
+    align-items: center;
+    margin: 5px 5px;
+    padding-block: 10px;
+}
+
+.settings-save-button{
+    margin: 0;
+
+}
+
+.timers {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 5px;
+}
+
+.timer {
+    font-size: 1.3rem;
+    flex: 1;
+    padding: 20px 0 0 0;
+    background-color: var(--timer-bg);
+    color: var(--text-secondary);
+    border-radius: 5px;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.timer h2 {
+    font-size: 0.65em;
+    margin: 0;
+    padding-bottom: 4px;
+}
+
+.remaining-timer {
+    padding: 5px; 
+    display: flex;
+    justify-content: space-between;
+    margin: 0px;
+    color: var(--text-third);
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85em;
+    padding: 35px 0;
+    margin: 0 10px;
+}
+
+.progress-bar {
+    width: 100%;
+    background-color: var(--timer-bg);
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 5px 0;
+}
+
+#progress {
+    height: 20px;
+    background-color: var(--progress-color);
+    width: 0%;
+    transition: width 0.5s ease, background-color 0.5s ease;
+}
+
+.settings-section {
+    border: 2px solid var(--timer-bg);
+    border-radius: 5px;
+    margin-top: 55px;
+    max-height: 55px;
+    overflow: hidden;
+    transition: max-height 0.8s ease;
+    background-color: var(--tab-bg);
+}
+
+.settings-section.expanded {
+    max-height: 1200px;
+}
+
+.thx-section {
+    border: 2px solid var(--timer-bg);
+    border-radius: 5px;
+    margin-block: 15px;
+    max-height: 55px;
+    overflow: hidden;
+    transition: max-height 0.8s ease;
+    background-color: var(--tab-bg);
+}
+
+.thx-section.expanded {
+    max-height: 800px;
+}
+
+.thx-header {
+    cursor: pointer;
+    background-color: var(--timer-bg);
+    padding: 17px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.settings-content {
+    margin: 20px;
+    text-align: left;
+}
+
+.settings-header {
+    cursor: pointer;
+    background-color: var(--timer-bg);
+    padding: 10px 10px 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 卡片样式 */
+.settings-card {
+    margin-block: 20px;
+}
+
+.settings-card h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-block: 10px;
+}
+
+.settings-description {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+}
+
+/* 设置项样式 */
+.settings-item {
+    background-color: var(--container-bg);
+    outline: 1px solid var(--timer-bg);
+    border-radius: 10px;
+    padding: 0 13px;
+    margin-bottom: 5px;
+}
+
+.checkbox-container {
+    padding: 13px 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer; /* 使整个容器可点击 */
+}
+
+/* 隐藏原始复选框 */
+input[type="checkbox"] {
+    display: none;
+}
+
+/* 自定义复选框样式 */
+.custom-checkbox {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--checkbox-bg);
+    background-color: var(--input-bg);
+    border-radius: 4px;
+    position: relative;
+    margin-right: 5px; /* 右侧间距 */
+    transition: background-color 0.3s ease;
+}
+
+input[type="checkbox"]:checked + .custom-checkbox {
+    background-color: var(--checkbox-bg);
+    border-color: var(--checkbox-focus);
+}
+
+/* 勾选标记 */
+.custom-checkbox:after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid var(--checkbox-text);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    opacity: 0; /* 初始不显示 */
+    transition: opacity 0.2s ease;
+}
+
+/* 勾选时显示标记 */
+input[type="checkbox"]:checked + .custom-checkbox:after {
+    opacity: 1;
+}

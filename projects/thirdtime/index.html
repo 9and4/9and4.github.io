@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>三分之一休息法计时器</title>
+    <link rel="icon" type="image/png" href="img/favicon-2-done-96.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <header class="header">
+            <h1>三分之一休息法计时器</h1>
+            <div class="header-btn-part">
+                <button id="toggle-dark-mode" aria-label="切换夜间模式">夜间 (W)</button>
+                <button onclick="window.location.href='https://9and4.github.io/projects/'"  aria-label="返回主页">✕</button>
+            </div>
+        </header>
+
+        <!-- 主要内容 -->
+        <main class="content">
+            <!-- 总时长输入 -->
+            <section class="input-section">
+                <label for="total-time">总时长：</label>
+                <input type="number" id="total-time" min="1" value="30">
+                <span>分钟</span>
+                <p class="settings-description" style="text-align: center; margin-block: 5px;">ⓘ 您打算计时多久？<br>「总时长」 = 您预期的工作时长 + 休息时长。</p>
+                </section>
+            <!-- 计时器和进度条 -->
+            <section class="main-section">
+                <div style="margin: 15px 5px;">
+                <div class="progress-bar">
+                    <div id="progress"></div>
+                </div>
+                <div class="remaining-timer">
+                    <span>剩余总时长：</span>
+                    <div id="remaining-total-time">00 : 00 : 00</div>
+                </div>
+                </div>
+                
+                <div class="timers">
+                    <div class="timer" id="work-timer">
+                        <h2>本次工作时间</h2>
+                        <div id="current-work-time">00 : 00 : 00</div>
+                        <!-- 工作按钮 -->
+                        <div class="control-buttons">
+                            <button id="start-work" aria-label="点击开始工作计时">开始工作 (A)</button>
+                        </div>
+                    </div>
+                    <div class="divider">÷ 3 =</div>
+                    <div class="timer" id="rest-timer">
+                        <h2>已挣得休息时间</h2>
+                        <div id="earned-rest-time">00 : 00 : 00</div>
+                        <!-- 休息按钮 -->
+                        <div class="control-buttons">
+                            <button id="start-rest" aria-label="点击开始休息计时">开始休息 (S)</button>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- 暂停和清零按钮 -->
+            <section class="input-section">
+                <button id="pause" aria-label="暂停计时">暂停 (Q)</button>
+                <button id="stop" aria-label="将计时器全部清零">清零 (C)</button>
+            </section>
+
+            <!-- 设置界面 -->
+            <section class="settings-section" id="settings">
+                <div class="settings-header" onclick="toggleSettings()">
+                    <span>𝄚　设置</span>
+                    <!-- 保存按钮 -->
+                    <button id="save-settings" class="settings-save-button" aria-label="保存设置">保存设置 (E)</button>
+                </div>
+                <div class="settings-content">
+                    <p class="settings-description" style="text-align: center;">⚠️ 修改和保存设置时，建议先暂停计时。⚠️</p>
+                        <!-- 工作背景音乐 -->
+                    <div class="settings-card">
+                        <h2>背景音（白噪音）</h2>
+                        <p class="settings-description">ⓘ「背景音」功能：计时期间，可循环播放背景音。点击下方的下拉选框时，可试听 10 秒。</p>
+                        <div class="settings-item">
+                            <label for="work-bgm-select">工作时的背景音：</label>
+                            <select id="work-bgm-select">
+                                <option value="bgm/wall-clock-tick-tock.wav">🔊 挂钟</option>
+                                <option value="bgm/small-waves-harbor-rocks.wav">🔊 海潮</option>
+                                <option value="bgm/newlocknew-ambpark.wav">🔊 秋日公园</option>
+                                <option value="bgm/kevp888-it-supermarket-in-florence.wav">🔊 超市收银台</option>
+                                <option value="bgm/klankbeeld_calm-pedestrian-river-boulevard-7.wav">🔊 林荫大道</option>
+                                <option value="bgm/inspectorj-rain-moderate-a.wav">🔊 落大雨</option>
+                                <option value="">🔇 关闭</option>
+                            </select>
+                        </div>
+
+                        <!-- 休息背景音乐 -->
+                        <div class="settings-item">
+                            <label for="rest-bgm-select">休息时的背景音：</label>
+                            <select id="rest-bgm-select">
+                                <option value="bgm/small-waves-harbor-rocks.wav">🔊 海潮</option>
+                                <option value="bgm/wall-clock-tick-tock.wav">🔊 挂钟</option>
+                                <option value="bgm/newlocknew-ambpark.wav">🔊 秋日公园</option>
+                                <option value="bgm/kevp888-it-supermarket-in-florence.wav">🔊 超市收银台</option>
+                                <option value="bgm/klankbeeld_calm-pedestrian-river-boulevard-7.wav">🔊 林荫大道</option>
+                                <option value="bgm/inspectorj-rain-moderate-a.wav">🔊 落大雨</option>
+                                <option value="">🔇 关闭</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- 拍拍功能 -->
+                    <div class="settings-card">
+                        <h2>拍拍</h2>
+                        <p class="settings-description">ⓘ「拍拍」功能：工作计时期间，每隔 X 分钟播放提示音，提醒您保持专注。</p>
+                        <div class="settings-item">
+                            <div class="checkbox-container" onclick="toggleCheckbox()">
+                                <input type="checkbox" id="presence-toggle">
+                                <div class="custom-checkbox"></div>
+                                <label for="presence-toggle">启用「拍拍」功能</label>
+                            </div>
+                        </div>
+                        <div class="settings-item">
+                            <label for="sound-select">「拍拍」提示音：</label>
+                            <select id="sound-select" class="settings-select">
+                                <option value="notification/ienba-notification.wav">🔊 呜危呜</option>
+                                <option value="notification/felisleopard-toy_drum_medium_hit.wav">🔊 咚</option>
+                                <option value="notification/eqylizer-high-pitched-two-note-notification.mp3">🔊 咔哒</option>
+                                <option value="notification/skyernaklea-notification-1.wav">🔊 咕噜咕~咕</option>
+                            </select>
+                        </div>
+                        <div class="settings-item">
+                            <label for="interval-input">「拍拍」提示音间隔：</label>
+                            <input type="number" id="interval-input" class="settings-input" min="1" value="5">
+                            <span>分钟</span>
+                        </div>
+                    </div>
+            
+                    <!-- 欠费功能 -->
+                    <div class="settings-card">
+                        <h2>欠费</h2>
+                        <p class="settings-description">ⓘ「欠费」功能：休息计时期间，当您休息的时长超过了已挣得的休息时间，播放提示音。</p>
+                        <div class="settings-item">
+                            <label for="debt-sound-select">「欠费」提示音：</label>
+                            <select id="debt-sound-select" class="settings-select">
+                                <option value="notification/davince21-harp-motif2.ogg">🔊 钢琴小段</option>
+                                <option value="notification/software-interface-start.wav">🔊 嘟咚~</option>
+                                <option value="notification/wrong-answer-fail-notification.wav">🔊 能量耗尽</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- 鸣谢界面 -->
+            <section class="thx-section" id="thx">
+                <div class="thx-header" onclick="toggleThx()">
+                    <span>𝄚　鸣谢</span>
+                </div>
+                <div class="settings-content">
+                    <div class="settings-card">
+                        <ul class="settings-description">
+                            <li>「钢琴小段」来自 <a href="https://freesound.org/people/DaVince21/sounds/563311/">DaVince21</a></li>
+                            <li>「咔哒」来自 <a href="https://freesound.org/people/eqylizer/">eqylizer</a></li>
+                            <li>「咚」来自 <a href="https://freesound.org/people/felisleopard/">felisleopard</a></li>
+                            <li>「呜危呜」来自 <a href="https://freesound.org/people/IENBA/">IENBA</a></li>
+                            <li>「落大雨」「挂钟」来自 <a href="https://freesound.org/people/InspectorJ/">InspectorJ</a></li>
+                            <li>「超市收银台」来自 <a href="https://freesound.org/people/kevp888/sounds/733901/">kevp888</a></li>
+                            <li>「林荫大道」来自 <a href="https://freesound.org/people/klankbeeld/">klankbeeld</a></li>
+                            <li>「海潮」「嘟咚~」「能量耗尽」来自 <a href="https://mixkit.co/free-sound-effects/">Mixkit.com</a></li>
+                            <li>「秋日公园」来自 <a href="https://freesound.org/people/newlocknew/sounds/788772/">newlocknew</a></li>
+                            <li>「咕噜咕~咕」来自 <a href="https://freesound.org/people/SkyernAklea/sounds/770226/">SkyernAklea</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
