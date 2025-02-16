@@ -12,10 +12,7 @@
         <!-- 头部 -->
         <header class="header">
             <h1>三分之一休息法计时器</h1>
-            <div class="header-btn-part">
-                <button id="toggle-dark-mode" aria-label="切换夜间模式">夜间 (W)</button>
-                <button onclick="window.location.href='https://9and4.github.io/projects/'"  aria-label="返回主页">✕</button>
-            </div>
+                <button id="toggle-dark-mode" aria-label="切换夜间模式">夜间模式 (W)</button>
         </header>
 
         <!-- 主要内容 -->
@@ -25,7 +22,7 @@
                 <label for="total-time">总时长：</label>
                 <input type="number" id="total-time" min="1" value="30">
                 <span>分钟</span>
-                <p class="settings-description" style="text-align: center; margin-block: 5px;">ⓘ 您打算计时多久？<br>「总时长」 = 您预期的工作时长 + 休息时长。</p>
+                <p class="description">ⓘ 您打算计时多久？<br>「总时长」 = 您预期的工作时长 + 休息时长。</p>
                 </section>
             <!-- 计时器和进度条 -->
             <section class="main-section">
@@ -84,14 +81,17 @@
                 </div>
                 <div class="settings-content">
                     <p class="settings-description" style="text-align: center;">⚠️ 修改和保存设置时，建议先暂停计时。⚠️</p>
+                        <!-- 工作背景音乐 -->
                     <div class="settings-card">
                         <h2>背景音（白噪音）</h2>
                         <p class="settings-description">ⓘ「背景音」功能：计时期间，可循环播放背景音。点击下方的下拉选框时，可试听 10 秒。</p>
-                        <!-- 工作背景音乐 -->
                         <div class="settings-item">
                             <label for="work-bgm-select">工作时的背景音：</label>
                             <select id="work-bgm-select">
-                                <option value="bgm/wall-clock-tick-tock.wav">🔊 挂钟</option>
+                                <option value="bgm/wall-clock-tick-tock.wav">
+                                    🔊 
+                                    挂钟
+                                </option>
                                 <option value="bgm/small-waves-harbor-rocks.wav">🔊 海潮</option>
                                 <option value="bgm/klankbeeld_calm-pedestrian-river-boulevard-7.wav">🔊 林荫大道</option>
                                 <option value="bgm/inspectorj-rain-moderate-a.wav">🔊 落大雨</option>
@@ -111,6 +111,22 @@
                             </select>
                         </div>
                     </div>
+
+                    <!-- 结束功能 -->
+                    <div class="settings-card">
+                        <h2>计时完毕</h2>
+                        <p class="settings-description">ⓘ 在总时长用尽时，播放提示音并弹窗提示您。</p>
+                        <div class="settings-item">
+                            <label for="over-sound-select">「计时完毕」提示音：</label>
+                            <select id="over-sound-select" class="settings-select">
+                                <option value="notification/joepayne-clean-and-pompous-fanfare-trumpet.mp3">🔊 华丽号角</option>
+                                <option value="notification/jobro-tada1.wav">🔊 经典号角</option>
+                                <option value="notification/unlistenable-electro-win-sound.wav">🔊 铛当啷铛</option>
+                                <option value="notification/davince21-harp-motif2.ogg">🔊 钢琴小段</option>
+                            </select>
+                        </div>
+                    </div>
+
                     <!-- 拍拍功能 -->
                     <div class="settings-card">
                         <h2>拍拍</h2>
@@ -123,8 +139,8 @@
                             </div>
                         </div>
                         <div class="settings-item">
-                            <label for="sound-select">「拍拍」提示音：</label>
-                            <select id="sound-select" class="settings-select">
+                            <label for="presence-sound-select">「拍拍」提示音：</label>
+                            <select id="presence-sound-select" class="settings-select">
                                 <option value="notification/ienba-notification.wav">🔊 呜危呜</option>
                                 <option value="notification/felisleopard-toy_drum_medium_hit.wav">🔊 咚</option>
                                 <option value="notification/eqylizer-high-pitched-two-note-notification.mp3">🔊 咔哒</option>
@@ -145,12 +161,13 @@
                         <div class="settings-item">
                             <label for="debt-sound-select">「欠费」提示音：</label>
                             <select id="debt-sound-select" class="settings-select">
-                                <option value="notification/davince21-harp-motif2.ogg">🔊 钢琴小段</option>
                                 <option value="notification/software-interface-start.wav">🔊 嘟咚~</option>
+                                <option value="notification/kwahmah_02-alarm1.mp3">🔊 小闹钟</option>
                                 <option value="notification/wrong-answer-fail-notification.wav">🔊 能量耗尽</option>
                             </select>
                         </div>
                     </div>
+
                 </div>
             </section>
             <!-- 鸣谢界面 -->
@@ -169,19 +186,24 @@
                 <div class="settings-content">
                     <div class="settings-card">
                         <ul class="settings-description">
-                            <li>「钢琴小段」来自 <a href="https://freesound.org/people/DaVince21/sounds/563311/">DaVince21</a></li>
+                            <li>「钢琴小段」来自 <a href="https://freesound.org/s/563311/">DaVince21</a></li>
                             <li>「咔哒」来自 <a href="https://freesound.org/people/eqylizer/">eqylizer</a></li>
                             <li>「咚」来自 <a href="https://freesound.org/people/felisleopard/">felisleopard</a></li>
                             <li>「呜危呜」来自 <a href="https://freesound.org/people/IENBA/">IENBA</a></li>
                             <li>「落大雨」「挂钟」来自 <a href="https://freesound.org/people/InspectorJ/">InspectorJ</a></li>
-                            <li>「超市收银台」来自 <a href="https://freesound.org/people/kevp888/sounds/733901/">kevp888</a></li>
+                            <li>「经典号角」来自 <a href="https://freesound.org/s/60443/">jobro</a></li>
+                            <li>「华丽号角」来自 <a href="https://freesound.org/s/413203/">joepayne</a></li>
+                            <li>「超市收银台」来自 <a href="https://freesound.org/s/733901/">kevp888</a></li>
                             <li>「林荫大道」来自 <a href="https://freesound.org/people/klankbeeld/">klankbeeld</a></li>
+                            <li>「小闹钟」来自 <a href="https://freesound.org/s/250629/">kwahmah_02</a></li>
                             <li>「海潮」「嘟咚~」「能量耗尽」来自 <a href="https://mixkit.co/free-sound-effects/">Mixkit.com</a></li>
-                            <li>「咕噜咕~咕」来自 <a href="https://freesound.org/people/SkyernAklea/sounds/770226/">SkyernAklea</a></li>
+                            <li>「咕噜咕~咕」来自 <a href="https://freesound.org/s/770226/">SkyernAklea</a></li>
+                            <li>「铛当啷铛」来自 <a href="https://freesound.org/s/391539/">Unlistenable</a></li>
                         </ul>
                     </div>
                 </div>
             </section>
+            <p  class="description" style="color: var(--text-secondary);">来自 <a href="https://9and4.github.io/projects">九四公园</a></p>
         </main>
     </div>
 
