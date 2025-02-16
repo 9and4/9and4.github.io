@@ -157,7 +157,7 @@ input, select {
 }
 
 select {
-    width: 50%;
+    width: 40%;
 }
 
 select:hover, input:hover {
@@ -380,7 +380,7 @@ button:hover {
     background-color: var(--container-bg);
     outline: 1px solid var(--timer-bg);
     border-radius: 10px;
-    padding: 0 13px;
+    padding: 5px 13px;
     margin-bottom: 5px;
 }
 
