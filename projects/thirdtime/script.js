@@ -16,9 +16,10 @@ const maxDebtAlpha = 1; // 最大欠费透明度
 let presenceInterval; // 用于存储定时器
 
 // 初始化设置
-let { presenceEnabled, selectedSound, intervalMinutes, selectedDebtSound } = loadSettings();
-let noticeAudio = new Audio(localStorage.getItem('selectedSound') || 'notification/ienba-notification.wav'); 
-let alertAudio = new Audio(localStorage.getItem('selectedDebtSound') || 'notification/davince21-harp-motif2.ogg'); 
+let { presenceEnabled, selectedPresemceSound, intervalMinutes, selectedDebtSound, selectedWorkBGM, selectedRestBGM, selectedOverSound } = loadSettings();
+let noticeAudio = new Audio(localStorage.getItem('selectedPresemceSound') || 'notification/ienba-notification.wav'); 
+let alertAudio = new Audio(localStorage.getItem('selectedDebtSound') || 'notification/software-interface-start.wav'); //默认欠费提示音
+let OverAudio = new Audio(localStorage.getItem('selectedOverSound') || 'notification/joepayne-clean-and-pompous-fanfare-trumpet.mp3'); //默认计时结束提示音
 let workAudio = new Audio(localStorage.getItem('selectedWorkBGM') || 'bgm/wall-clock-tick-tock.wav');
 let restAudio = new Audio(localStorage.getItem('selectedRestBGM') || 'bgm/small-waves-harbor-rocks.wav');
 
@@ -44,24 +45,26 @@ function toggleCheckbox() {
     checkbox.checked = !checkbox.checked;
 }
 
-// 加载presence的用户设置
+// 加载用户设置
 function loadSettings() {
     const presenceEnabled = localStorage.getItem('presenceEnabled') === 'true';
-    const selectedSound = localStorage.getItem('selectedSound') || 'notification/ienba-notification.wav'; // 默认 presence 提示音
+    const selectedPresemceSound = localStorage.getItem('selectedPresemceSound') || 'notification/ienba-notification.wav'; // 默认 presence 提示音
     const intervalMinutes = parseInt(localStorage.getItem('intervalMinutes'), 10) || 5;
-    const selectedDebtSound = localStorage.getItem('selectedDebtSound') || 'notification/davince21-harp-motif2.ogg'; // 默认欠费提示音
+    const selectedDebtSound = localStorage.getItem('selectedDebtSound') || 'notification/software-interface-start.wav'; // 默认欠费提示音
+    const selectedOverSound = localStorage.getItem('selectedOverSound') || 'notification/joepayne-clean-and-pompous-fanfare-trumpet.mp3'; // 默认计时完毕提示音
     const selectedWorkBGM = localStorage.getItem('selectedWorkBGM') || 'bgm/wall-clock-tick-tock.wav'; // 默认工作背景音乐
     const selectedRestBGM = localStorage.getItem('selectedRestBGM') || 'bgm/small-waves-harbor-rocks.wav'; // 默认休息背景音乐
 
     // 更新界面
     document.getElementById('presence-toggle').checked = presenceEnabled;
-    document.getElementById('sound-select').value = selectedSound;
+    document.getElementById('presence-sound-select').value = selectedPresemceSound;
     document.getElementById('interval-input').value = intervalMinutes;
     document.getElementById('debt-sound-select').value = selectedDebtSound; // 设置欠费提示音
+    document.getElementById('over-sound-select').value = selectedOverSound; // 设置计时完毕提示音 
     document.getElementById('work-bgm-select').value = selectedWorkBGM; // 设置工作背景音乐
     document.getElementById('rest-bgm-select').value = selectedRestBGM; // 设置休息背景音乐
 
-    return { presenceEnabled, selectedSound, intervalMinutes, selectedDebtSound, selectedWorkBGM, selectedRestBGM };
+    return { presenceEnabled, selectedPresemceSound, intervalMinutes, selectedDebtSound, selectedWorkBGM, selectedRestBGM, selectedOverSound };
 }
 
 // 页面加载时初始化设置
@@ -72,16 +75,18 @@ window.addEventListener('load', () => {
 // 保存 用户设置
 document.getElementById('save-settings').addEventListener('click', () => {
     const presenceEnabled = document.getElementById('presence-toggle').checked;
-    const selectedSound = document.getElementById('sound-select').value;
+    const selectedPresemceSound = document.getElementById('presence-sound-select').value;
     const intervalMinutes = parseInt(document.getElementById('interval-input').value, 10);
     const selectedDebtSound = document.getElementById('debt-sound-select').value; // 获取用户选择的欠费提示音
+    const selectedOverSound = document.getElementById('over-sound-select').value; // 获取用户选择的计时完毕提示音
     const selectedWorkBGM = document.getElementById('work-bgm-select').value; // 获取用户选择的工作背景音乐
     const selectedRestBGM = document.getElementById('rest-bgm-select').value; // 获取用户选择的休息背景音乐
 
     localStorage.setItem('presenceEnabled', presenceEnabled);
-    localStorage.setItem('selectedSound', selectedSound);
+    localStorage.setItem('selectedPresemceSound', selectedPresemceSound);
     localStorage.setItem('intervalMinutes', intervalMinutes);
     localStorage.setItem('selectedDebtSound', selectedDebtSound); // 保存欠费提示音
+    localStorage.setItem('selectedOverSound', selectedOverSound); // 保存计时完毕提示音
     localStorage.setItem('selectedWorkBGM', selectedWorkBGM); // 保存工作背景音乐
     localStorage.setItem('selectedRestBGM', selectedRestBGM); // 保存休息背景音乐
 
@@ -95,8 +100,9 @@ document.getElementById('save-settings').addEventListener('click', () => {
         previewAudio.currentTime = 0;
     }
     
-    noticeAudio = new Audio(selectedSound); // 重新加载 拍拍（presence） 提示音
+    noticeAudio = new Audio(selectedPresemceSound); // 重新加载 拍拍（presence） 提示音
     alertAudio = new Audio(selectedDebtSound); // 重新加载 欠费提示音
+    OverAudio = new Audio(selectedOverSound); // 重新加载 计时完毕提示音
 
     // 如果正在工作，重新启动 presence 功能
     if (isWorking) {
@@ -108,25 +114,48 @@ document.getElementById('save-settings').addEventListener('click', () => {
 });
 
 // 添加事件监听器，当用户选择不同的 拍拍 提示音时，播放该提示音
-document.getElementById('sound-select').addEventListener('change', (event) => {
-    const selectedSound = event.target.value;
+document.getElementById('presence-sound-select').addEventListener('change', (event) => {
+    const selectedPresemceSound = event.target.value;
     if (noticeAudio) {
         noticeAudio.pause(); // 停止当前正在播放的提示音
+        alertAudio.pause(); 
+        OverAudio.pause(); 
         noticeAudio.currentTime = 0; // 重置音频播放位置
+        alertAudio.currentTime = 0; 
+        OverAudio.currentTime = 0; 
     }
-    noticeAudio = new Audio(selectedSound); // 加载新的提示音
+    noticeAudio = new Audio(selectedPresemceSound); // 加载新的提示音
     noticeAudio.play(); // 播放新的提示音
 });
 
 // 添加事件监听器，当用户选择不同的 欠费 提示音时，播放该提示音
 document.getElementById('debt-sound-select').addEventListener('change', (event) => {
-    const selectedSound = event.target.value;
-    if (noticeAudio) {
+    const selectedDebtSound = event.target.value;
+    if (alertAudio) {
         noticeAudio.pause(); // 停止当前正在播放的提示音
+        alertAudio.pause(); 
+        OverAudio.pause(); 
         noticeAudio.currentTime = 0; // 重置音频播放位置
+        alertAudio.currentTime = 0; 
+        OverAudio.currentTime = 0; 
     }
-    noticeAudio = new Audio(selectedSound); // 加载新的提示音
-    noticeAudio.play(); // 播放新的提示音
+    alertAudio = new Audio(selectedDebtSound); // 加载新的提示音
+    alertAudio.play(); // 播放新的提示音
+});
+
+// 添加事件监听器，当用户选择不同的 计时完毕 提示音时，播放该提示音
+document.getElementById('over-sound-select').addEventListener('change', (event) => {
+    const selectedOverSound = event.target.value;
+    if (OverAudio) {
+        noticeAudio.pause(); // 停止当前正在播放的提示音
+        alertAudio.pause(); 
+        OverAudio.pause(); 
+        noticeAudio.currentTime = 0; // 重置音频播放位置
+        alertAudio.currentTime = 0; 
+        OverAudio.currentTime = 0; 
+    }
+    OverAudio = new Audio(selectedOverSound); // 加载新的提示音
+    OverAudio.play(); // 播放新的提示音
 });
 
 let previewAudio = null; // 用于试听的音频对象
@@ -149,9 +178,8 @@ document.getElementById('rest-bgm-select').addEventListener('change', (event) =>
 
 // 试听背景音乐
 function playPreview(audioSrc) {
-    // 停止之前的试听
     if (previewAudio) {
-        previewAudio.pause();
+        previewAudio.pause();  // 停止之前的试听
         previewAudio.currentTime = 0;
     }
 
@@ -391,6 +419,7 @@ function updateRestTime() {
         updateProgressBar();
     } else {
         pause(); // 如果挣得休息时间为0或剩余总时间为0，停止计时
+        showOverSound(); // 显示计时结束提示
     }
 }
 
@@ -412,7 +441,24 @@ function updateWorkTime() {
         updateProgressBar();
     } else {
         pause(); // 如果剩余总时间为0，停止计时
+        showOverSound(); // 显示计时结束提示
     }
+}
+
+function showOverSound() {
+    OverAudio.play(); // 播放提示音
+
+    // 监听音频播放完毕事件
+    OverAudio.addEventListener('ended', () => {
+        // 弹窗提示
+        alert('计时结束！总时长已用尽。');
+    }, { once: true });
+
+    // 监听音频加载失败事件
+    OverAudio.addEventListener('error', () => {
+        // 如果音频加载失败，直接弹窗
+        alert('计时结束！总时长已用尽。');
+    }, { once: true });
 }
 
 // 更新显示
