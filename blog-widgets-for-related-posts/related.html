@@ -11,50 +11,59 @@
   </div>
 
   <script>
-    // 假设当前页面的标签和排除的文章链接
-    const tags = ["旅行", "日常生活", "大阪"];
-    const excludeLink = "/osaka-travel"; // 排除当前文章的链接
+    // 解析 URL 查询参数
+    const params = new URLSearchParams(window.location.search);
+    const rawTags = params.get('tags');  // 获取 tags 参数
+    const excludeLink = params.get('exclude');  // 获取 exclude 参数
 
-    // 载入 JSON 数据文件并显示相关文章
-    fetch('https://9and4.github.io/blog-widgets-for-related-posts/blog-articles.json')
-      .then(res => res.json())
-      .then(articles => {
-        const seen = new Set(); // 防止重复文章
-        const finalArticles = [];
+    // 如果没有传递 tags 参数，显示提示信息
+    if (!rawTags) {
+      document.getElementById('articles-list').innerHTML = '<li>未提供關鍵詞參數。</li>';
+    } else {
+      // 处理 tags 参数
+      const tags = rawTags.split(',').map(tag => tag.trim());  // 将 tags 转换为数组
 
-        // 过滤出符合标签的文章
-        articles.forEach(article => {
-          if (article.link !== excludeLink && !seen.has(article.link)) {
-            const matchingTags = article.tags.filter(tag => tags.includes(tag));
-            if (matchingTags.length > 0) {
-              finalArticles.push(article);
-              seen.add(article.link);
-            }
-          }
-        });
+      // 载入 JSON 数据文件并显示相关文章
+      fetch('https://9and4.github.io/blog-widgets-for-related-posts/blog-articles.json')
+        .then(res => res.json())
+        .then(articles => {
+          const seen = new Set();  // 用来避免重复显示相同文章
+          const finalArticles = [];
 
-        // 如果不到 5 篇，再从其他文章中补充
-        if (finalArticles.length < 5) {
+          // 过滤出符合标签的文章
           articles.forEach(article => {
             if (article.link !== excludeLink && !seen.has(article.link)) {
-              finalArticles.push(article);
-              seen.add(article.link);
+              const matchingTags = article.tags.filter(tag => tags.includes(tag));  // 匹配标签
+              if (matchingTags.length > 0) {
+                finalArticles.push(article);
+                seen.add(article.link);
+              }
             }
           });
-        }
 
-        // 动态生成列表项
-        const list = document.getElementById('articles-list');
-        if (finalArticles.length > 0) {
-          finalArticles.forEach(article => {
-            const li = document.createElement('li');
-            li.innerHTML = `<a href="${article.link}" target="_parent">${article.title}</a>`;
-            list.appendChild(li);
-          });
-        } else {
-          list.innerHTML = '<li>這個主題還沒有相關文章。如果你感興趣，去留言區留言吧。或是<a href="/">先回主頁逛逛</a>。</li>';
-        }
-      });
+          // 如果不到 5 篇，再从其他文章中补充
+          if (finalArticles.length < 5) {
+            articles.forEach(article => {
+              if (article.link !== excludeLink && !seen.has(article.link)) {
+                finalArticles.push(article);
+                seen.add(article.link);
+              }
+            });
+          }
+
+          // 动态生成列表项
+          const list = document.getElementById('articles-list');
+          if (finalArticles.length > 0) {
+            finalArticles.forEach(article => {
+              const li = document.createElement('li');
+              li.innerHTML = `<a href="${article.link}" target="_parent">${article.title}</a>`;
+              list.appendChild(li);
+            });
+          } else {
+            list.innerHTML = '<li>這個主題還沒有相關文章。如果你感興趣，去留言區留言吧。或是<a href="/">先回主頁逛逛</a>。</li>';
+          }
+        });
+    }
   </script>
 
 </body>
