@@ -69,7 +69,6 @@
 }
 
 .article-item {
-  margin-bottom: 12px;
   padding: 8px 0;
   border-bottom: 1px dashed var(--link-border);
 }
@@ -79,19 +78,16 @@
 }
 
 .article-link {
-  color: var(--link-color);
-  text-decoration: none;
-  font-size: 0.95em;
-  transition: all 0.2s ease;
-  display: block;
-  padding: 4px 6px;
-  border-radius: 3px;
+    color:var(--link-color);
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.2s;
+    border-radius: 3px;
 }
 
 .article-link:hover {
-  text-decoration: none;
-  box-shadow: 0 0 0 3px var(--link-border);
-  background-color: var(--link-background);
+    text-decoration: none;
+  	box-shadow: 0 0 0 3px var(--link-border);
 }
 
 .no-results {
@@ -101,14 +97,15 @@
 }
 
 .no-results a {
-  color: var(--link-color);
-  text-decoration: none;
-  transition: all 0.2s ease;
+    color:var(--link-color);
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.2s;
+    border-radius: 3px;
 }
 
 .no-results a:hover {
-  text-decoration: none;
-  box-shadow: 0 0 0 3px var(--link-border);
-  background-color: var(--link-background);
+    text-decoration: none;
+  	box-shadow: 0 0 0 3px var(--link-border);
 }
 
