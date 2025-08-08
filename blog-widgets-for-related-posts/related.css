@@ -1,3 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC&family=Noto+Sans+TC&display=swap');
+
+:root {
+    --width: 820px;
+    --font-main: "IM Fell English", "KaiTi", "Kaiti SC", "STKaiti", "Comic Sans MS", source-han-serif-tc, ui-serif, system-ui, serif;
+    /*--font-secondary: 'Open Sans', 'Microsoft YaHei', Hiragino Sans GB, system-ui, san-serif;*/
+    --font-secondary: "Roboto Slab", "Noto Sans SC", "Noto Sans TC", "Noto Sans", ui-sans-serif, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-code: ui-monospace, "Cascadia Mono", "Segoe UI Mono", "Liberation Mono", Menlo, Monaco, Consolas,"Noto Sans TC", "Noto Sans SC",monospace;  
+  --font-scale: 1.13em;
+    --letter-spacing: 0.05em;
+    --background-color: #f1f1f1;
+    --heading-color: #000000;
+    --text-color: #404040;
+    --link-color: #404040;
+    --link-border: #9f7544;
+    /*--link-border: #ff7f00;*/
+    --link-background: #E0E3FD;
+    /*--visited-color: rgba(0, 0, 0, 0.8);*/
+    --visited-color: #9f7544;
+    --code-background-color: #ffffff;
+    --code-color: #666666;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+      /* --background-color: #232323;*/
+      --background-color: #08192d;
+      --heading-color: #ffffff;
+      --text-color: #e1e1e1;
+      --link-color: #e1e1e1;
+      /*--link-border: #6074ff;*/
+      --link-border: #c09662;
+      --link-background: #292c42;
+      /*--visited-color: #7d7d7d;*/
+      --visited-color: #c09662;
+      --code-background-color: #000;
+      --code-color: #bbbbbb;
+    }
+
+    header,
+    footer {
+        border-color: #ffffff !important;
+    }
+
+}
+
 .related-articles-container {
   font-family: var(--font-secondary);
   max-width: var(--width);
@@ -65,14 +112,3 @@
   background-color: var(--link-background);
 }
 
-/* 暗黑模式特定調整 */
-@media (prefers-color-scheme: dark) {
-  .related-articles-container {
-    --link-background: rgba(41, 44, 66, 0.5);
-  }
-  
-  .article-link:hover,
-  .no-results a:hover {
-    --link-background: rgba(41, 44, 66, 0.8);
-  }
-}
