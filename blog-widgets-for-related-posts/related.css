@@ -65,13 +65,14 @@ body {
 }
 
 .articles-list {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+  list-style-type: disc; /* 顯示實心圓點 */
+  padding-left: 1.5em; /* 標準列表縮進 */
+  margin: 0.5em 0; 
 }
 
 .article-item {
-  padding: 8px 0;
+  padding: 6px 0;
+  display: list-item; /* 這行很重要 */
 }
 
 .article-item:last-child {
@@ -109,5 +110,6 @@ body {
     text-decoration: none;
   	box-shadow: 0 0 0 3px var(--link-border);
 }
+
 
 
