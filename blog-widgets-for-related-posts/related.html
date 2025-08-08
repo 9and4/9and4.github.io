@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>相關博文</title>
   <link rel="stylesheet" href="related.css">
+  <style>
+    /* 繼承博客的CSS */
+    body {
+      background-color: transparent !important;
+      margin: 0;
+      padding: 0;
+      color: var(--text-color);
+      font-family: var(--font-secondary);
+    }
+  </style>
 </head>
 <body>
   <div class="related-articles-container">
@@ -13,6 +23,42 @@
   </div>
 
   <script>
+    // 檢測暗黑模式
+    document.addEventListener('DOMContentLoaded', function() {
+      // 檢測系統顏色偏好
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      // 設置初始顏色變數
+      setThemeVariables(prefersDark);
+      
+      // 監聽顏色模式變化
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+        setThemeVariables(e.matches);
+      });
+      
+      function setThemeVariables(isDark) {
+        document.documentElement.style.setProperty('--font-main', 
+          getComputedStyle(parent.document.documentElement).getPropertyValue('--font-main'));
+        document.documentElement.style.setProperty('--font-secondary', 
+          getComputedStyle(parent.document.documentElement).getPropertyValue('--font-secondary'));
+        document.documentElement.style.setProperty('--background-color', 
+          isDark ? '#08192d' : '#f1f1f1');
+        document.documentElement.style.setProperty('--heading-color', 
+          isDark ? '#ffffff' : '#000000');
+        document.documentElement.style.setProperty('--text-color', 
+          isDark ? '#e1e1e1' : '#404040');
+        document.documentElement.style.setProperty('--link-color', 
+          isDark ? '#e1e1e1' : '#404040');
+        document.documentElement.style.setProperty('--link-border', 
+          isDark ? '#c09662' : '#9f7544');
+        document.documentElement.style.setProperty('--link-background', 
+          isDark ? 'rgba(41, 44, 66, 0.5)' : '#E0E3FD');
+        document.documentElement.style.setProperty('--visited-color', 
+          isDark ? '#c09662' : '#9f7544');
+      }
+    });
+
+    // 載入相關文章    
     document.addEventListener('DOMContentLoaded', function() {
       const params = new URLSearchParams(window.location.search);
       const rawTags = params.get('tags');
